@@ -1,0 +1,56 @@
+#include<bits/stdc++.h>
+#include <ext/pb_ds/assoc_container.hpp>
+using namespace __gnu_pbds;
+using namespace std;
+typedef tree<int, null_type, less<int>, rb_tree_tag,
+            tree_order_statistics_node_update>
+    ordered_set;
+#define ll  long long int
+bool cal(vector<ll>vp,map<ll,ll>&mp,ll mid){
+    ll ct=0;
+    for(auto it=mp.begin();it!=mp.end();it++){
+        if(it->second>mid){
+            ct+=(it->second-mid);
+        }
+    }
+    //cout<<ct<<" jf ";
+    ct*=2;
+    ll ctt=0;
+    for(ll i=0;i<vp.size();i++){
+        if(vp[i]<mid) {
+            ll t=mid-vp[i];
+            if(t%2==0) ctt+=t;
+            else ctt+=(t-1);
+        }
+    }
+   // cout<<mid<<" "<<ct<<" "<<ctt<<endl;
+    return (ctt>=ct);
+}
+int main(){
+    ll tt;
+    tt=1;
+    cin>>tt;
+    while(tt--){
+        ll n,m;
+        cin>>n>>m;
+        ll a[m];
+        map<ll,ll>mp;
+        for(ll i=0;i<m;i++){
+            cin>>a[i];
+            mp[a[i]]++;
+        }
+        vector<ll>vp(n,0);
+        for(ll i=1;i<=n;i++){
+            vp[i-1]=mp[i];
+        }
+        ll left=1,right=m;
+        while(right-left>1){
+            ll mid=(left+right)/2;
+            if(cal(vp,mp,mid)) right=mid;
+            else left=mid+1;
+        }
+        if(cal(vp,mp,left)) cout<<left<<endl;
+        else cout<<right<<endl;
+       // for(ll i=0;i<n;i++) cout<<vp[i]<<"as"; cout<<endl;
+    }
+}
