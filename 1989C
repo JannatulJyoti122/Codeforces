@@ -1,0 +1,56 @@
+#include<bits/stdc++.h>
+#include <ext/pb_ds/assoc_container.hpp>
+using namespace __gnu_pbds;
+using namespace std;
+typedef tree<int, null_type, less<int>, rb_tree_tag,
+            tree_order_statistics_node_update>
+    ordered_set;
+#define ll  long long int
+int main(){
+    ll tt;
+    tt=1;
+    cin>>tt;
+    while(tt--){
+        ll n;
+        cin>>n;
+        ll a[n],b[n];
+        for(ll i=0;i<n;i++) {
+            cin>>a[i];
+        }
+        for(ll i=0;i<n;i++) {
+            cin>>b[i];
+        }
+        ll sum1=0,sum2=0;
+        for(ll i=0;i<n;i++){
+            if(a[i]>=0||b[i]>=0){
+                if(a[i]>=0)
+                    sum1+=a[i];
+                if(b[i]>=0)
+                    sum2+=b[i];
+                if(a[i]==1&&b[i]==1){
+                    a[i]=100;
+                    b[i]=100;
+                }
+                else{
+                    a[i]=-2;
+                    b[i]=-2;
+                }
+
+            }
+        }
+        for(ll i=0;i<n;i++){
+            if((a[i]==-2&&b[i]==-2)||(a[i]==100&&b[i]==100)) continue;
+            if(sum1+a[i]>sum2+b[i]) sum1+=a[i];
+            else if(sum1+a[i]<sum2+b[i]) sum2+=b[i];
+            else sum1+=a[i];
+        }
+        for(ll i=0;i<n;i++){
+            if(a[i]==100&&b[i]==100){
+                if(sum1>sum2) sum1--;
+                else if(sum1<sum2) sum2--;
+                else sum1--;
+            }
+        }
+        cout<<min(sum1,sum2)<<endl;
+    }
+}
