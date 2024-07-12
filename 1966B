@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll  long long int
+int main(){
+    ll tt;
+    cin>>tt;
+    while(tt--){
+        ll n,m;
+        cin>>n>>m;
+        char ch[n][m];
+        for(ll i=0;i<n;i++){
+            for(ll j=0;j<m;j++){
+                cin>>ch[i][j];
+            }
+        }
+        ll cw=0,cb=0;
+        for(ll i=0;i<n;i++){
+            if(cw==0)
+                if(ch[i][0]=='W') cw++;
+            if(cb==0)
+                if(ch[i][0]=='B') cb++;
+        }
+        for(ll i=0;i<n;i++){
+            if(cw==1)
+                if(ch[i][m-1]=='W') cw++;
+            if(cb==1)
+                if(ch[i][m-1]=='B') cb++;
+        }
+        for(ll i=0;i<m;i++){
+            if(cw==2)
+                if(ch[0][i]=='W') cw++;
+            if(cb==2)
+                if(ch[0][i]=='B') cb++;
+        }
+        for(ll i=0;i<m;i++){
+            if(cw==3)
+                if(ch[n-1][i]=='W') cw++;
+            if(cb==3)
+                if(ch[n-1][i]=='B') cb++;
+        }
+        if(cw==4||cb==4) cout<<"YES\n";
+        else cout<<"NO\n";
+    }
+}
