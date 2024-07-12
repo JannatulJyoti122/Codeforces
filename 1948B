@@ -1,0 +1,60 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll  long long int
+int main(){
+    ll tt;
+    cin>>tt;
+    while(tt--){
+        ll n;
+        cin>>n;
+        ll a[n];
+        for(ll i=0;i<n;i++) cin>>a[i];
+        ll prev=0;
+        bool ch=true;
+        for(ll i=0;i<n;i++){
+            //cout<<prev<<" ";
+            if(a[i]==0){
+                if(prev<=a[i]) prev=a[i];
+                else {
+                    ch=false;
+                    break;
+                }
+                continue;
+            }
+            ll p=a[i];
+            vector<ll>v;
+            while(p>0){
+                v.push_back(p%10);
+                p/=10;
+            }
+            bool check=true;
+            for(ll j=1;j<v.size();j++){
+                if(v[j]>v[j-1]){
+                    check=false;
+                    break;
+                }
+            }
+            if(check==false){
+                if(prev<=a[i]){
+                    prev=a[i];
+                }
+                else {
+                    ch=false;
+                    break;
+                }
+            }
+            else{
+                if(v[v.size()-1]>=prev) prev=v[0];
+                else{
+                    if(prev<=a[i]) prev=a[i];
+                    else{
+                        ch=false;
+                        break;
+                    }
+                }
+            }
+        }
+        if(ch) cout<<"YES\n";
+        else cout<<"NO\n";
+    }
+}
