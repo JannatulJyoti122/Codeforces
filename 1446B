@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll  long long int
+ll mod=1e9+7;
+int main(){
+    ll tt;
+    cin>>tt;
+    while(tt--){
+        ll n,k;
+        cin>>n>>k;
+        ll sum=0;
+        ll a[n];
+        for(ll i=0;i<n;i++){
+            cin>>a[i];
+            sum=((sum%mod)+(a[i]%mod))%mod;
+        }
+        ll mx=0;
+        ll sm=0;
+        for(ll i=0;i<n;i++){
+            ll p=(sm+a[i]);
+            if(p>=0LL){
+                sm+=a[i];
+            }
+            else sm=0;
+            mx=max(mx,sm);
+        }
+        ll ans=0;
+        mx%=mod;
+        for(ll i=0;i<k;i++){
+            ans=((ans%mod)+(mx%mod))%mod;
+            mx=((mx%mod)*2)%mod;
+        }
+        //cout<<mx<<" ";
+        ans+=sum;
+        //cout<<ans<< " ";
+        if(ans>=0) cout<<ans%mod<<endl;
+        else cout<<mod+ans<<endl;
+    }
+}
