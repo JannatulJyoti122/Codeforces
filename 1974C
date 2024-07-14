@@ -1,0 +1,75 @@
+#include<bits/stdc++.h>
+#include <ext/pb_ds/assoc_container.hpp>
+using namespace __gnu_pbds;
+using namespace std;
+typedef tree<int, null_type, less<int>, rb_tree_tag,
+            tree_order_statistics_node_update>
+    ordered_set;
+#define ll  long long int
+int main(){
+    ll tt;
+    tt=1;
+    cin>>tt;
+    while(tt--){
+        ll n;
+        cin>>n;
+        ll a[n];
+        for(ll i=0;i<n;i++) cin>>a[i];
+        map<pair<ll,ll>,vector<ll>>f,s,m;
+        for(ll i=0;i<n-2;i++){
+            f[{a[i+1],a[i+2]}].push_back(a[i]);
+            s[{a[i],a[i+2]}].push_back(a[i+1]);
+            m[{a[i],a[i+1]}].push_back(a[i+2]);
+        }
+        ll tot=0;
+        for(auto it=f.begin();it!=f.end();it++){
+            map<ll,ll>mp;
+            for(ll i=0;i<it->second.size();i++){
+                mp[it->second[i]]++;
+            }
+            ll p=it->second.size();
+            //cout<<p<<" ";
+            for(auto itt=mp.begin();itt!=mp.end();itt++){
+                ll t=itt->second;
+                ll rr=((p-t)*t);
+                //if(rr>0)
+                tot+=rr;
+                //cout<<rr<<" ";
+                p-=t;
+            }
+        }
+        for(auto it=s.begin();it!=s.end();it++){
+            map<ll,ll>mp;
+            for(ll i=0;i<it->second.size();i++){
+                mp[it->second[i]]++;
+            }
+            ll p=it->second.size();
+            for(auto itt=mp.begin();itt!=mp.end();itt++){
+                ll t=itt->second;
+                ll rr=((p-t)*t);
+                if(rr>0)
+                    tot+=rr;
+                p-=t;
+            }
+        }
+        for(auto it=m.begin();it!=m.end();it++){
+            map<ll,ll>mp;
+            for(ll i=0;i<it->second.size();i++){
+                mp[it->second[i]]++;
+            }
+            ll p=it->second.size();
+            for(auto itt=mp.begin();itt!=mp.end();itt++){
+                ll t=itt->second;
+                ll rr=((p-t)*t);
+                if(rr>0)
+                    tot+=rr;
+                p-=t;
+            }
+        }
+        cout<<tot<<endl;
+    }
+}
+
+
+
+
