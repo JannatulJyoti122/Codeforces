@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+#include <ext/pb_ds/assoc_container.hpp>
+using namespace __gnu_pbds;
+using namespace std;
+typedef tree<int, null_type, less<int>, rb_tree_tag,
+            tree_order_statistics_node_update>
+    ordered_set;
+#define ll long long  int
+int main(){
+    ll tt;
+    tt=1;
+    cin>>tt;
+    while(tt--){
+       ll n;
+       cin>>n;
+       ll a[n];
+       for(ll i=0;i<n;i++) cin>>a[i];
+       ll pre[n-1],post[n-1];
+       pre[0]=1;
+       for(ll i=1;i<n-1;i++){
+           if(a[i+1]-a[i]<a[i]-a[i-1]) pre[i]=1;
+           else pre[i]=a[i+1]-a[i];
+           pre[i]+=pre[i-1];
+       }
+       post[n-2]=1;
+       for(ll i=n-2;i>=1;i--){
+          if(a[i]-a[i-1]<a[i+1]-a[i]) post[i-1]=1;
+          else post[i-1]=a[i]-a[i-1];
+          post[i-1]+=post[i];
+       }
+       //for(ll i=0;i<n-1;i++) cout<<pre[i]<<" "; cout<<endl;
+       //for(ll i=0;i<n-1;i++) cout<<post[i]<<" "; cout<<endl;
+       ll q;
+       cin>>q;
+       while(q--){
+           ll x,y;
+           cin>>x>>y;
+           if(x<y){
+               if(x==1) cout<<pre[y-2]<<endl;
+               else{
+                   //cout<<pre[x-2]<<" "<<pre[y-2]<<" ";
+                   cout<<pre[y-2]-pre[x-2]<<endl;
+               }
+           }
+           else{
+               if(x==n){
+                   cout<<post[y-1]<<endl;
+               }
+               else{
+                   cout<<post[y-1]-post[x-1]<<endl;
+               }
+           }
+       }
+    }
+}
