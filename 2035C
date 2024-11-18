@@ -1,0 +1,107 @@
+
+#include<bits/stdc++.h>
+#include <ext/pb_ds/assoc_container.hpp>
+using namespace __gnu_pbds;
+using namespace std;
+typedef tree<int, null_type, less<int>, rb_tree_tag,
+            tree_order_statistics_node_update>
+    ordered_set;
+#define ll long long  int
+unsigned ll cal_root(unsigned ll mid){
+    ll root=sqrt(mid)+2;
+    while(root*root>mid) root--;
+    return root;
+}
+ll print(ll n){
+    ll k=1;
+    for(ll i=3;i<=n;i++){
+        if(i%2==1) k&=i;
+        else k|=i;
+        //cout<<i<<" ** "<<k<<endl;
+    }
+    return k;
+}
+ll even(ll n,ll m){
+    ll k=1;
+    for(ll i=3;i<m;i++){
+        if(i%2==0) k|=i;
+        else k&=i;
+    }
+    for(ll i=m+1;i<=n;i++){
+        if(i%2==1) k|=i;
+        else k&=i;
+    }
+    k|=m;
+    return k;
+}
+void printeven(ll n,ll m){
+    cout<<2<<" "<<1<<" ";
+    for(ll i=3;i<m;i++) cout<<i<<" ";
+    for(ll i=m+1;i<=n;i++) cout<<i<<" ";
+    cout<<m<<" ";
+}
+ll cal_log(ll n){
+    ll ct=0;
+    while(n>1){
+        n/=2;
+        ct++;
+    }
+    return ct;
+}
+int main(){
+    ll tt;
+    tt=1;
+    cin>>tt;
+    while(tt--){
+        ll n;
+        cin>>n;
+        if(n==1){
+            cout<<0<<endl;
+            cout<<1<<endl;
+        }
+        else if(n==2||n==3){
+            cout<<2<<endl;
+            for(ll i=1;i<=n;i++) cout<<i<<" "; cout<<endl;
+        }
+        else if(n==4){
+            cout<<6<<endl;
+            for(ll i=0;i<n;i++) cout<<i+1<<" "; cout<<endl;
+        }
+        else if(n==5){
+            cout<<5<<endl;
+            cout<<2<<" "<<1<<" ";
+            for(ll i=3;i<=n;i++) cout<<i<<" "; cout<<endl;
+        }
+        else if(n==6){
+            cout<<7<<endl;
+            cout<<2<<" "<<1<<" ";
+            for(ll i=3;i<=n;i++) cout<<i<<" "; cout<<endl;
+        }
+        else{
+            ll logg=cal_log(n);
+            ll temp=pow(2,logg);
+            //cout<<temp<<"-- ";
+            if(temp==n||pow(2,logg+1)==n+1){
+                cout<<print(n)<<endl;
+                cout<<2<<" "<<1<<" ";
+                for(ll i=3;i<=n;i++) cout<<i<<" "; cout<<endl;
+            }
+            else if(n%2==0){
+                cout<<even(n,temp-1)<<endl;
+                printeven(n,temp-1);
+                cout<<endl;
+            }
+            else{
+                if(n-1==pow(2,logg)){
+                    cout<<(print(n-1)&n)<<endl;
+                    cout<<2<<" "<<1<<" ";
+                    for(ll i=3;i<=n-1;i++) cout<<i<<" "; cout<<n<<endl;
+                    continue;
+                }
+                cout<<(even(n-1,temp-1)&n)<<endl;
+                printeven(n-1,temp-1);
+                cout<<n<<endl;
+            }
+        }
+    }
+}
