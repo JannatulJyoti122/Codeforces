@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+#include <ext/pb_ds/assoc_container.hpp>
+using namespace __gnu_pbds;
+using namespace std;
+typedef tree<int, null_type, less<int>, rb_tree_tag,
+            tree_order_statistics_node_update>
+    ordered_set;
+#define ll long long  int
+int main(){
+    ll tt;
+    tt=1;
+    cin>>tt;
+    while(tt--){
+        ll n;
+        cin>>n;
+        ll aa,b;
+        cin>>aa>>b;
+        ll a[n];
+        ll gcdd=__gcd(aa,b);
+        for(ll i=0;i<n;i++){
+            cin>>a[i];
+            a[i]%=gcdd;
+        }
+        sort(a,a+n);
+        ll ans=a[n-1]-a[0];
+        for(ll i=1;i<n;i++){
+            ans=min(ans,a[i-1]+gcdd-a[i]);
+        }
+        cout<<ans<<endl;
+    }
+}
