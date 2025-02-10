@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+using namespace std;
+using ll=long long;
+int main() {
+    int tt;
+    cin>>tt;
+    while(tt--){
+        ll n,m;
+        cin>>n>>m;
+        ll a[n];
+        vector<int>b(m);
+        for(int i=0;i<n;i++) cin>>a[i];
+        for(int i=0;i<m;i++) cin>>b[i];
+        if(n==1){
+            cout<<"YES\n";
+            continue;
+        }
+        bool ff=true;
+        sort(b.begin(),b.end());
+        for(int i=0;i<n;i++){
+            if(i==0){
+                a[i]=min(a[i],b[i]-a[i]);
+                continue;
+            }
+            auto it=lower_bound(b.begin(),b.end(),1LL*(a[i]+a[i-1]));
+            if(it==b.end()){
+                if(a[i]<a[i-1]){
+                    ff=false;
+                    break;
+                }
+                continue;
+            }
+            if(a[i]>=a[i-1]||*it-a[i]>=a[i-1]){
+                if(a[i]>=a[i-1]&&*it-a[i]<a[i-1]){
+                    continue;
+                }
+                else if(a[i]<a[i-1]&&*it-a[i]>=a[i-1]){
+                    a[i]=*it-a[i];
+                    continue;
+                }
+                a[i]=min(a[i],*it-a[i]);
+            }
+            else{
+                ff=false;
+                break;
+            }
+        }
+        if(ff==false) cout<<"NO\n";
+        else cout<<"YES\n";
+    }
+}
