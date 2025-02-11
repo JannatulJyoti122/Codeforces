@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+using namespace std;
+using ll=long long;
+int main() {
+    int tt;
+    cin>>tt;
+    while(tt--){
+        ll l,r;
+        cin>>l>>r;
+        int pos=0;
+        for(int i=30;i>=0;i--){
+            if((l&(1LL<<i))!=(r&(1LL<<i))){
+                pos=i;
+                break;
+            }
+        }
+        ll a=l|((1<<pos)-1);
+        ll b=a+1;
+        ll c=r;
+        if(a==c||b==c) c--;
+        if(a==c||b==c) c--;
+        cout<<a<<" "<<b<<" "<<c<<endl;
+    }
+}
