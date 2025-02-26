@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long int;
+int main(){
+    ll tt;
+    cin>>tt;
+    int cs=0;
+    //tt=1;
+    while(tt--){
+        ll n;
+        cin>>n;
+        ll a[n];
+        for(int i=0;i<n;i++) cin>>a[i];
+        int mx=0;
+        int l=1,r=1;
+        for(int i=0;i<n-1;i++){
+            int choto=0,boro=0;
+            for(int j=i+1;j<n;j++){
+                if(a[j]>a[i]) boro++;
+                if(a[j]<a[i]) choto++;
+                if(choto-boro>mx){
+                    l=i+1;
+                    r=j+1;
+                    mx=choto-boro;
+                }
+            }
+        }
+        cout<<l<<" "<<r<<endl;
+    }
+}
