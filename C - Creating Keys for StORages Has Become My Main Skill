@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int tt;
+    cin>>tt;
+    int cs=0;
+    //tt=1;
+    while(tt--){
+        int n,x;
+        cin>>n>>x;
+        int orr=0;
+        int temp=x;
+        int min_num=0;
+        int it=0;
+        while(temp>0){
+            if(temp%2==0){
+                break;
+            }
+            temp/=2;
+            it++;
+        }
+        min_num=1<<it;
+        //cout<<min_num<<" nksnngls "<<endl;
+        int i=0;
+        for(;i<n-1;i++){
+            //if(orr==x) break;
+            if(i==min_num) break;
+            cout<<i<<" ";
+            orr|=i;
+        }
+        //cout<<orr<<" orr ";
+        if(i==min_num){
+            for(;i<n;i++) cout<<x<<" ";
+        }
+        else{
+            if(orr==x||(orr|i)==x){
+                cout<<i;
+            }
+            else cout<<x;
+        }
+        cout<<endl;
+    }
+}
