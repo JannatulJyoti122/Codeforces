@@ -1,0 +1,56 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int n, k;
+string s;
+vector<int> a;
+
+bool check(int d) {
+    char last = 'R';
+    int cnt = 0;
+    
+    for (int i = 0; i < n; i++) {
+        if (a[i] > d) {
+            if (s[i] == 'B' && last != 'B') {
+                cnt++;
+            }
+            last = s[i];
+        }
+    }
+    
+    return cnt <= k;
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
+    int t;
+    cin >> t;
+    
+    while (t--) {
+        cin >> n >> k;
+        cin >> s;
+        
+        a.resize(n);
+        for (int i = 0; i < n; i++) {
+            cin >> a[i];
+        }
+
+        int l = 0, r = 1e9, res = -1;
+
+        while (l <= r) {
+            int m = (l + r) / 2;
+            if (check(m)) {
+                res = m;
+                r = m - 1;
+            } else {
+                l = m + 1;
+            }
+        }
+        
+        cout << res << "\n";
+    }
+
+    return 0;
+}
