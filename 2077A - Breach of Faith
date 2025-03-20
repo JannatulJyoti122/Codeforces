@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long int;
+int main(){
+    ll tt;
+    cin>>tt;
+    while(tt--){
+        ll n;
+        cin>>n;
+        vector<ll>a(2*n);
+        ll sum=0;
+        for(ll i=0;i<2*n;i++) {
+            cin>>a[i];
+            sum+=a[i];
+        }
+        sort(a.begin(),a.end());
+        ll sum1=0;
+        for(ll i=0;i<n;i++){
+            if(i==0) continue;
+            sum1+=a[i];
+        }
+        ll extra=sum-sum1-sum1;
+        vector<ll>ans(2*n+1);
+        ans[0]=a[0];
+        ans[1]=extra;
+        ll j=2;
+        for(ll i=n;i<2*n;i++,j+=2) ans[j]=a[i];
+        j=3;
+        for(ll i=1;i<n;i++,j+=2) ans[j]=a[i];
+        for(ll i=0;i<=2*n;i++) cout<<ans[i]<<" "; cout<<endl;
+    }
+}
