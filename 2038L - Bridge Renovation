@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long int;
+int main() {
+    ll tt=1;
+    //cin>>tt;
+    while(tt--){
+        int n;
+        cin>>n;
+        int tot=n/2;
+        int ct_f=n; ///count of 25
+        int ct_e=n/2; ///count of 18
+        if(n%2==1) ct_e++;
+        int baki=0;
+        if(n%2==0){
+            tot+=ct_e/3;
+            if(ct_e%3==1){
+                tot++;
+                ct_f--;
+            }
+            else if(ct_e%3==2) tot++;
+            ct_e=0;
+        }
+        else{
+            tot++;
+            if(ct_e==1){
+                ct_f--;
+                baki=1;
+                ct_e--;
+            }
+            else{
+                ct_e-=2;
+            }
+            tot+=ct_e/3;
+            if(ct_e%3==1){
+                tot++;
+                ct_f--;
+
+            }
+            else if(ct_e%3==2) tot++;
+        }
+        tot+=ct_f/2;
+        if(ct_f%2==1||baki==1) tot++;
+
+        cout<<tot<<endl;
+    }
+}
