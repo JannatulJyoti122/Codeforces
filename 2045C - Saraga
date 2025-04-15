@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long int;
+int main() {
+    ll tt=1;
+    //cin>>tt;
+    while(tt--){
+        string s,t;
+        cin>>s>>t;
+        vector<int>v(26,0);
+        ll i=t.size();
+        for(i=i-2;i>=0;i--){
+            if(v[t[i]-'a']==0) v[t[i]-'a']=i+1;
+        }
+        ll min_len=1e9;
+        ll len_t=t.size();
+        ll left=0,right=t.size();
+        for(ll i=1;i<s.size();i++){
+            if((v[s[i]-'a'])==0) continue;
+            if(len_t-v[s[i]-'a']+i+1<min_len){
+                min_len=len_t-v[s[i]-'a']+i+1;
+                left=i,right=v[s[i]-'a'];
+            }
+        }
+        if(left==0&&right==t.size()) cout<<-1<<endl;
+        else{
+            for(int i=0;i<=left;i++) cout<<s[i];
+            for(int i=right;i<t.size();i++) cout<<t[i]; cout<<endl;
+        }
+    }
+}
