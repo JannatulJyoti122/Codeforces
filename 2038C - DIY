@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int t;
+    cin >> t;
+
+    while (t--) {
+        int n;
+        cin >> n;
+        map<int,int>mp;
+        for(int i=0;i<n;i++) {
+            int x;
+            cin>>x;
+            mp[x]++;
+        }
+        vector<int>new_list;
+        for(auto it=mp.begin();it!=mp.end();it++){
+            if(it->second==1) continue;
+            int ct=it->second/2;
+            while(ct>0){
+                new_list.push_back(it->first);
+                ct--;
+            }
+        }
+        if(new_list.size()<4){
+            cout<<"NO\n";
+            continue;
+        }
+        int a=new_list[0];
+        int b=new_list[1];
+        int j=new_list.size();
+        j--;
+        int c=new_list[j-1];
+        int d=new_list[j];
+        cout<<"YES\n";
+        cout<<a<<" "<<b<<" "<<a<<" "<<d<<" "<<c<<" "<<b<<" "<<c<<" "<<d<<endl;
+    }
+
+    return 0;
+}
