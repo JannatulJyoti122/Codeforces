@@ -1,0 +1,74 @@
+#include <bits/stdc++.h>
+using namespace std;
+using ll=long long int;
+int main() {
+    int t=1;
+    cin >> t;
+    while (t--) {
+        ll n;
+        cin>>n;
+        ll a[n],b[n];
+        for(ll i=0;i<n;i++) cin>>a[i];
+        for(ll i=0;i<n;i++) cin>>b[i];
+        ll ind=-1;
+        for(ll i=0;i<n;i++){
+            if(a[i]==b[i]) {
+                ind=i;
+                break;
+            }
+        }
+        vector<pair<ll,ll>>p;
+        if(n%2==1&&ind>=0){
+            if(ind>n/2){
+                for(ll i=ind-1;i>=(n/2);i--){
+                    swap(a[i],a[i+1]);
+                    swap(b[i],b[i+1]);
+                    p.push_back({i+1,i+2});
+                }
+            }
+            if(ind<n/2){
+                for(ll i=ind+1;i<=(n/2);i++){
+                    swap(a[i],a[i-1]);
+                    swap(b[i],b[i-1]);
+                    p.push_back({i,i+1});
+                }
+            }
+        }
+        map<pair<ll,ll>,vector<ll>>mp;
+        for(ll i=0;i<n;i++){
+            ll mn=min(a[i],b[i]);
+            ll mx=max(a[i],b[i]);
+            mp[{mn,mx}].push_back(i+1);
+        }
+        ll ct=0;
+        map<ll,ll>map_a;
+        for(ll i=0;i<n;i++){
+            //if(a[i]==b[i]) ind=i;
+            map_a[a[i]]=i;
+            ll mn=min(a[i],b[i]);
+            ll mx=max(a[i],b[i]);
+            if(mp[{mn,mx}].size()==1){
+                ct++;
+            }
+        }
+        if((n%2==1&&ct>1)||(n%2==0&&ct>=1)){
+            cout<<-1<<endl;
+            continue;
+        }
+        for(ll i=0;i<n;i++){
+            ll cur_ind=map_a[b[i]];
+            ll dest=n-i-1;
+            if(cur_ind==dest) continue;
+            swap(a[cur_ind],a[dest]);
+            swap(b[cur_ind],b[dest]);
+            map_a[a[cur_ind]]=cur_ind;
+            map_a[a[dest]]=dest;
+            p.push_back({cur_ind+1,dest+1});
+        }
+        cout<<p.size()<<endl;
+        for(ll i=0;i<p.size();i++){
+            cout<<p[i].first<<" "<<p[i].second<<endl;
+        }
+
+    }
+}
