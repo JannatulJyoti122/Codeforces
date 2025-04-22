@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+using ll=long long int;
+int main() {
+    int t=1;
+    cin >> t;
+    while (t--) {
+        ll n,b,c;
+        cin>>n>>b>>c;
+        if(b==0){
+            if(c+2==n||c+1==n){
+                cout<<n-1<<endl;
+                continue;
+            }
+            else if(c>=n){
+                cout<<n<<endl;
+            }
+            else cout<<-1<<endl;
+            continue;
+        }
+        if(n<=c){
+            cout<<n<<endl;
+            continue;
+        }
+        ll temp=n-c+b-1;
+        temp/=b;
+        ll ind=temp+1;
+        if(ind>n){
+            cout<<0<<endl;
+            continue;
+        }
+        cout<<n-ind+1<<endl;
+    }
+}
