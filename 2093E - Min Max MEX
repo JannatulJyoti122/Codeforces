@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+using namespace std;
+using ll=long long int;
+vector<ll>vv(2e5+10,0);
+bool check(vector<ll>&v,ll k,ll m){
+    ll tot=0;
+    ll mex=0;
+    for(ll i=0;i<v.size();i++){
+        if(v[i]<=v.size()+1)
+            vv[v[i]]=1;
+        while(vv[mex]) mex++;
+        if(mex>=m){
+            tot++;
+            for(ll j=0;j<min(m+1,(ll)v.size()+2);j++)
+                vv[j]=0;
+            mex=0;
+        }
+
+    }
+    for(ll i=0;i<v.size();i++) vv[i]=0;
+    return tot>=k;
+}
+int main() {
+    int t=1;
+    cin >> t;
+    while (t--) {
+        ll  n,k;
+        cin>>n>>k;
+        vector<ll>a(n);
+        for(ll i=0;i<n;i++) cin>>a[i];
+        ll l=0;
+        ll r=1e9;
+        while (r - l > 1) {
+            ll m = (r + l) / 2;
+            if (check(a, k, m)==true) {
+                l = m;
+            } else {
+                r = m;
+            }
+        }
+        //if(check(a,k,r)==true) cout<<r<<endl;
+        //else
+        cout << l << '\n';
+    }
+}
