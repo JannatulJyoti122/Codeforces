@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+using namespace std;
+using ll=long long int;
+vector<ll>vv(2e5+10,0);
+
+int main() {
+    int t=1;
+    cin >> t;
+    while (t--) {
+        ll n,m;
+        cin>>n>>m;
+        vector<ll>v(m);
+        for(ll i=0;i<m;i++) cin>>v[i];
+        sort(v.begin(),v.end());
+        ll ans=0;
+        for(ll i=1;i<n;i++){
+            ll choto=min(i,n-i);
+            ll boro=max(i,n-i);
+            ll ct1=v.end()-lower_bound(v.begin(),v.end(),choto);
+            ll ct2=v.end()-lower_bound(v.begin(),v.end(),boro);
+            ct1--;
+            //cout<<ct1<<" "<<ct2<<endl;
+            ans+=(ct1*ct2);
+        }
+        cout<<ans<<endl;
+    }
+}
