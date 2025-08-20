@@ -1,0 +1,33 @@
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long int;
+int main(){
+    int tt;
+    cin>>tt;
+    while(tt--){
+        int n;
+        cin>>n;
+        vector<int>g[n+1];
+        for(int i=1;i<n;i++){
+            int u,v;
+            cin>>u>>v;
+            g[u].push_back(v);
+            g[v].push_back(u);
+        }
+        int mn=1e9;
+        int leaf=0;
+        for(int i=1;i<=n;i++){
+            if(g[i].size()==1) leaf++;
+        }
+        for(int i=1;i<=n;i++){
+            int ct=0;
+            if(g[i].size()==1) ct++;
+            for(int j=0;j<g[i].size();j++){
+                int temp=g[i][j];
+                if(g[temp].size()==1) ct++;
+            }
+            mn=min(mn,leaf-ct);
+        }
+        cout<<mn<<endl;
+    }
+}
