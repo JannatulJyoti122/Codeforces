@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long int;
+int main(){
+    int tt;
+    cin>>tt;
+
+    while(tt--){
+        ll n,k;
+        cin>>n>>k;
+        ll a[n],b[n];
+        map<ll,ll>mp;
+        for(ll i=0;i<n;i++){
+            cin>>a[i];
+            a[i]%=k;
+        }
+        for(ll i=0;i<n;i++){
+            cin>>b[i];
+            b[i]%=k;
+            mp[b[i]]++;
+        }
+        bool f=true;
+        for(ll i=0;i<n;i++){
+            if(mp[a[i]]>0) {
+                mp[a[i]]--;
+                continue;
+            }
+            ll t1=k-a[i];
+            ll t2=k+a[i];
+            if(mp[t1]<=0&&mp[t2]<=0){
+                f=false;
+                break;
+            }
+            if(mp.find(t1)!=mp.end()) mp[t1]--;
+            else mp[t2]--;
+        }
+        if(f) cout<<"YES\n";
+        else cout<<"NO\n";
+    }
+}
