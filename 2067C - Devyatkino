@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+using namespace std;
+using ll =long long int;
+
+int main(){
+    int tt;
+    cin>>tt;
+    while(tt--){
+        ll n;
+        cin>>n;
+        ll mn=10;
+        for(int i=0;i<=9;i++){
+            string s=to_string(n-i);
+            int mx=0;
+            for(auto c:s){
+                if(c<='7'){
+                    mx=max(mx,c-'0');
+                }
+            }
+            if(i>=7-mx){
+                mn=i;
+                break;
+            }
+        }
+        cout<<mn<<endl;
+    }
+}
