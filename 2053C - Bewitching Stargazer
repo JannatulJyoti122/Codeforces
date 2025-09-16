@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+using ll =long long int;
+ll tot=0;
+pair<ll,ll> solve(ll n,ll k){
+    if(n<k) return{0,0} ;
+    auto child=solve(n/2,k);
+    ll sum=child.first;
+    ll ct=child.second;
+    if(n&1){
+        ll m=(n+1)/2;
+        sum=m+(sum*2)+(ct*m);
+        ct=(2*ct)+1;
+    }
+    else{
+        ll m=n/2;
+        sum=(sum*2)+(ct*m);
+        ct=(2*ct);
+
+    }
+    return {sum,ct};
+}
+int main(){
+    int tt;
+    cin>>tt;
+    while(tt--){
+        ll n,k;
+        cin>>n>>k;
+        tot=0;
+        cout<<solve(n,k).first<<endl;
+    }
+}
