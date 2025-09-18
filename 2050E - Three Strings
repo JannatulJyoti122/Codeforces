@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+using ll =long long int;
+int main(){
+    int tt;
+    cin>>tt;
+    while(tt--){
+        string a,b,c;
+        cin>>a>>b>>c;
+        int x=a.size(),y=b.size(),z=c.size();
+        vector<vector<int>>dp(x+1,vector<int>(y+1,10000));
+        for(int i=0;i<=x;i++) dp[i][y]=0;
+        for(int i=0;i<=y;i++) dp[x][i]=0;
+        dp[x][y]=0;
+        dp[x][y]=0;
+        for(int ii=y-1,jj=z-1;ii>=0;ii--,jj--){
+            if(b[ii]==c[jj]) dp[x][ii]=dp[x][ii+1];
+            else dp[x][ii]=dp[x][ii+1]+1;
+        }
+        for(int ii=x-1,jj=z-1;ii>=0;ii--,jj--){
+            if(a[ii]==c[jj]) dp[ii][y]=dp[ii+1][y];
+            else dp[ii][y]=dp[ii+1][y]+1;
+        }
+        for(int i=x-1;i>=0;i--){
+            for(int j=y-1;j>=0;j--){
+                dp[i][j]=min(dp[i+1][j]+(a[i]!=c[i+j]),dp[i][j+1]+(b[j]!=c[i+j]));
+            }
+        }
+        cout<<dp[0][0]<<endl;
+    }
+}
