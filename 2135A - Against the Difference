@@ -1,0 +1,24 @@
+#include<bits/stdc++.h>
+using namespace std;
+using ll =long long int;
+int main(){
+    int tt;
+    cin>>tt;
+    while(tt--){
+        int n;
+        cin>>n;
+        int a[n+1];
+        deque<int>first[n+1];
+        vector<int>dp(n+1,0);
+        for(int i=1;i<=n;i++){
+            cin>>a[i];
+        }
+        for(int i=1;i<=n;i++){
+            dp[i]=dp[i-1];
+            first[a[i]].emplace_back(i);
+            if(first[a[i]].size()>a[i]) first[a[i]].pop_front();
+            if(first[a[i]].size()==a[i]) dp[i]=max(dp[i],dp[first[a[i]].front()-1]+a[i]);
+        }
+        cout<<dp[n]<<endl;
+    }
+}
