@@ -1,0 +1,17 @@
+#include<bits/stdc++.h>
+using namespace std;
+using ll =long long int;
+int main(){
+    int tt;
+    cin>>tt;
+    while(tt--){
+        ll n,k;
+        cin>>n>>k;
+        ll a[n];
+        for(ll i=0;i<n;i++){
+            cin>>a[i];
+            a[i]=a[i]+((a[i]%(k+1))*k);
+        }
+        for(ll i=0;i<n;i++) cout<<a[i]<<" "; cout<<endl;
+    }
+}
