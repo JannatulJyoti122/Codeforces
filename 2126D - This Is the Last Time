@@ -1,0 +1,34 @@
+#include<bits/stdc++.h>
+using namespace std;
+using ll =long long int;
+int main(){
+    int tt;
+    cin>>tt;
+    while(tt--){
+        ll n,k;
+        cin>>n>>k;
+        pair<pair<ll,ll>,ll>p[n];
+        for(ll i=0;i<n;i++){
+            ll x,y,z;
+            cin>>x>>y>>z;
+            p[i].first={x,y};
+            p[i].second=z;
+        }
+        sort(p,p+n);
+        ll mx=k;
+        set<ll>st;
+        st.insert(k);
+        for(ll i=0;i<n;i++){
+            ll x=p[i].first.first;
+            ll y=p[i].first.second;
+            ll z=p[i].second;
+            auto num=st.lower_bound(x);
+            if(num==st.end()) continue;
+            if(*num>=x&&*num<=y){
+                mx=max(mx,z);
+                st.insert(z);
+            }
+        }
+        cout<<mx<<endl;
+    }
+}
