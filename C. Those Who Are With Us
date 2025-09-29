@@ -1,0 +1,78 @@
+#include<bits/stdc++.h>
+using namespace std;
+using ll =long long int;
+int main(){
+    int tt;
+    cin>>tt;
+    while(tt--){
+        ll n,m;
+        cin>>n>>m;
+        vector<pair<ll,ll>>v;
+        ll a[n][m];
+        ll mx=0;
+        for(ll i=0;i<n;i++){
+            for(ll j=0;j<m;j++){
+                cin>>a[i][j];
+                mx=max(mx,a[i][j]);
+            }
+        }
+        ll ct=0;
+        vector<pair<ll,ll>>vp;
+        for(ll i=0;i<n;i++){
+            for(ll j=0;j<m;j++){
+                if(a[i][j]==mx) {
+                    ct++;
+                    v.push_back({i,j});
+                }
+            }
+        }
+        if(ct<=2) {
+            cout<<mx-1<<endl;
+            continue;
+        }
+        set<ll>r,c;
+        for(ll i=0;i<n;i++){
+            ct=0;
+            for(ll j=0;j<m;j++){
+                if(a[i][j]==mx) ct++;
+            }
+            if(ct>1) r.insert(i);
+        }
+        if(r.size()>1){
+            cout<<mx<<endl;
+            continue;
+        }
+        else if(r.size()==1){
+            ll it=*r.begin();
+            set<ll>st;
+            for(ll i=0;i<v.size();i++){
+                if(v[i].first!=it) st.insert(v[i].second);
+            }
+            if(st.size()>1) cout<<mx<<endl;
+            else cout<<mx-1<<endl;
+            continue;
+        }
+        for(ll i=0;i<m;i++){
+            ct=0;
+            for(ll j=0;j<n;j++){
+                if(a[j][i]==mx) ct++;
+            }
+            if(ct>1) c.insert(i);
+        }
+        if(c.size()>1){
+            cout<<mx<<endl;
+            continue;
+        }
+        if(c.size()==0){
+            cout<<mx<<endl;
+            continue;
+        }
+        ll it=*c.begin();
+        set<ll>st;
+        for(ll i=0;i<v.size();i++){
+            if(v[i].second!=it) st.insert(v[i].first);
+        }
+        if(st.size()>1) cout<<mx<<endl;
+        else cout<<mx-1<<endl;
+    }
+}
