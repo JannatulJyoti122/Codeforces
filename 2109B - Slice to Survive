@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+using namespace std;
+using ll =long long int;
+ll f(ll a,ll b){
+    ll ct=0;
+    while(a>1){
+        a=(a+1)/2;
+        ct++;
+    }
+    while(b>1){
+        b=(b+1)/2;
+        ct++;
+    }
+    return ct;
+}
+int main(){
+    int tt;
+    cin>>tt;
+    while(tt--){
+        ll r1,c1,r2,c2;
+        cin>>r1>>c1>>r2>>c2;
+        ll col1=c1;
+        ll row1=min(r2,r1-r2+1);
+        ll row2=r1;
+        ll col2=min(c2,c1-c2+1);
+        //cout<<row1<<" "<<col1<<" "<<row2<<" "<<col2<<endl;
+        cout<<min(f(col1,row1),f(col2,row2))+1<<endl;
+    }
+}
