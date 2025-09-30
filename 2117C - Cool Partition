@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+using ll =long long int;
+int main(){
+    int tt;
+    cin>>tt;
+    while(tt--){
+        ll n;
+        cin>>n;
+        ll a[n];
+        for(ll i=0;i<n;i++)cin>>a[i];
+        map<ll,ll>mp,mp1;
+        mp[a[0]]++;
+        ll ct=1;
+        set<ll>st;
+        for(ll i=1;i<n;i++){
+            mp1[a[i]]++;
+            if(mp.find(a[i])!=mp.end()){
+                st.insert(a[i]);
+                if(st.size()==mp.size()){
+                    ct++;
+                    mp.clear();
+                    mp=mp1;
+                    mp1.clear();
+                    st.clear();
+                }
+            }
+        }
+        cout<<ct<<endl;
+    }
+}
