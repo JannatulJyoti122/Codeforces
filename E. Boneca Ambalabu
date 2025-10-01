@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+using namespace std;
+using ll =long long int;
+int main(){
+    int tt;
+    cin>>tt;
+    while(tt--){
+        ll n;
+        cin>>n;
+        ll a[n];
+        vector<ll>v(32,0);
+        for(ll i=0;i<n;i++){
+            cin>>a[i];
+            ll temp=a[i];
+            ll j=0;
+            while(temp>0){
+                if(temp%2==1) v[j]++;
+                j++;
+                temp/=2;
+            }
+        }
+        ll mx=0,ind=-1;
+        for(ll i=0;i<n;i++){
+            ll tot=0;
+            ll temp=a[i];
+            for(ll j=0;j<30;j++){
+                if(temp%2==1){
+                    ll p=n-v[j];
+                    tot+=(pow(2,j)*p);
+                }
+                else{
+                    tot+=pow(2,j)*v[j];
+                }
+                temp/=2;
+            }
+            mx=max(mx,tot);
+        }
+        cout<<mx<<endl;
+    }
+}
