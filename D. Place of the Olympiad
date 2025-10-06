@@ -1,0 +1,18 @@
+#include<bits/stdc++.h>
+using namespace std;
+using ll =long long int;
+
+int main(){
+    int tt;
+    cin>>tt;
+    while(tt--){
+        ll n,m,k;
+        cin>>n>>m>>k;
+        ll tot=k/n;
+        if(k%n>0) tot++;
+        ll barrier=m-tot+1;
+        ll ans=tot/barrier;
+        if(tot%barrier>0) ans++;
+        cout<<max(1LL,ans)<<endl;
+    }
+}
