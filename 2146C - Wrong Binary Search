@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+using namespace std;
+using ll =long long int;
+
+int main(){
+    int tt;
+    cin>>tt;
+    while(tt--){
+        ll n;
+        cin>>n;
+        string s;
+        cin>>s;
+        getchar();
+        if(n==1){
+            if(s[0]=='1') {
+                cout<<"YES\n"<<1<<endl;
+            }
+            else{
+                cout<<"NO\n";
+            }
+            continue;
+        }
+        bool f=true;
+        for(ll i=0;i<n;i++){
+            if(s[i]=='1'){
+                if(i+1<n&&i+2<n&&s[i+1]=='0'&&s[i+2]=='1'){
+                    f=false;
+                    break;
+                }
+            }
+        }
+        if(f==false ||(s[0]=='0'&&s[1]=='1')||(s[n-1]=='0'&&s[n-2]=='1')){
+            cout<<"NO\n";
+            continue;
+        }
+        cout<<"YES\n";
+        vector<ll>v;
+        for(ll i=0;i<n;i++){
+            if(s[i]=='0') v.push_back(i+1);
+            else{
+                ll ii=v.size();
+                ii--;
+                while(ii>=0) {
+                    cout<<v[ii]<<" ";
+                    ii--;
+                }
+                v.clear();
+                cout<<i+1<<" ";
+            }
+        }
+        ll ii=v.size();
+        ii--;
+        while(ii>=0){
+            cout<<v[ii]<<" ";
+            ii--;
+        }
+        cout<<endl;
+    }
+}
