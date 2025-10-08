@@ -1,0 +1,18 @@
+#include<bits/stdc++.h>
+using namespace std;
+using ll =long long int;
+
+int main(){
+    int tt;
+    cin>>tt;
+    while(tt--){
+        ll n,a,b,c,d;
+        cin>>n>>a>>b>>c>>d;
+        ll ans=0;
+        if(a>c) ans=max(ans,n-c);
+        else if(a<c) ans=max(ans,c);
+        if(b>d) ans=max(ans,n-d);
+        else if(b<d) ans=max(ans,d);
+        cout<<ans<<endl;
+    }
+}
