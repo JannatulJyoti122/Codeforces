@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long int;
+int main(){
+    int tt=1;
+    vector<ll>v;
+    ll x=0;
+    ll ii=1;
+    while(x<=1e6+10){
+        x+=ii;
+        v.push_back(x);
+        ii++;
+    }
+    v.push_back(x);
+    cin>>tt;
+    while(tt--){
+        ll x;
+        cin>>x;
+        if(binary_search(v.begin(),v.end(),x)==true){
+            cout<<lower_bound(v.begin(),v.end(),x)-v.begin()+1<<endl;
+            continue;
+        }
+        ll ind1=upper_bound(v.begin(),v.end(),x)-v.begin();
+        if(v[ind1]-x==1) cout<<ind1+1+1<<endl;
+        else cout<<ind1+1<<endl;
+    }
+}
